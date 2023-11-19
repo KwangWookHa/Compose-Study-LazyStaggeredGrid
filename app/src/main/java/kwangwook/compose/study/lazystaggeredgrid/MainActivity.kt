@@ -9,10 +9,21 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import kwangwook.compose.study.lazystaggeredgrid.ui.ListItem
 import kwangwook.compose.study.lazystaggeredgrid.ui.theme.ComposeStudyLazyStaggeredGridTheme
 
 class MainActivity : ComponentActivity() {
+    
+    private val exampleItems = List(100) {
+        ListItem(
+            height = (100..300).random().dp,
+            color = Color((0xFF000000..0xFFFFFFFF).random()).copy(alpha = 1f)
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
