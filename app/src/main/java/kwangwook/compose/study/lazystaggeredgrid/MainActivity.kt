@@ -25,7 +25,7 @@ import kwangwook.compose.study.lazystaggeredgrid.ui.theme.ComposeStudyLazyStagge
 class MainActivity : ComponentActivity() {
 
     companion object {
-        private const val STAGGERED_GRID_CELLS_COUNT = 2
+        private const val STAGGERED_GRID_CELLS_COUNT = 3
     }
 
     private val exampleItems = List(100) {
@@ -41,21 +41,72 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeStudyLazyStaggeredGridTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    LazyVerticalStaggeredGrid(
+                    MainScreenGrid(
                         modifier = Modifier.fillMaxSize(),
-                        columns = StaggeredGridCells.Fixed(STAGGERED_GRID_CELLS_COUNT),
-                        contentPadding = PaddingValues(16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalItemSpacing = 16.dp
-                    ) {
-                        items(exampleItems) {
-                            RandomColorBox(it)
-                        }
-                    }
+                        columns = StaggeredGridCells.Adaptive(40.dp)
+                    )
                 }
             }
         }
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
+    @Composable
+    fun MainScreenGrid(
+        modifier: Modifier = Modifier,
+        columns : StaggeredGridCells
+    ) {
+        LazyVerticalStaggeredGrid(
+            modifier = modifier,
+            columns = columns,
+            contentPadding = PaddingValues(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalItemSpacing = 16.dp
+        ) {
+            items(exampleItems) {
+                RandomColorBox(it)
+            }
+        }
+    }
+
+    @OptIn(ExperimentalFoundationApi::class)
+    @Preview(showBackground = true)
+    @Composable
+    fun MainScreenFixedGrid() {
+        MainScreenGrid(
+            modifier = Modifier.fillMaxSize(),
+            columns = StaggeredGridCells.Fixed(STAGGERED_GRID_CELLS_COUNT)
+        )
+    }
+
+    @OptIn(ExperimentalFoundationApi::class)
+    @Preview(showBackground = true)
+    @Composable
+    fun MainScreenFixedGrid5() {
+        MainScreenGrid(
+            modifier = Modifier.fillMaxSize(),
+            columns = StaggeredGridCells.Fixed(5)
+        )
+    }
+
+    @OptIn(ExperimentalFoundationApi::class)
+    @Preview(showBackground = true)
+    @Composable
+    fun MainScreenAdaptiveGrid() {
+        MainScreenGrid(
+            modifier = Modifier.fillMaxSize(),
+            columns = StaggeredGridCells.Adaptive(40.dp)
+        )
+    }
+
+    @OptIn(ExperimentalFoundationApi::class)
+    @Preview(showBackground = true)
+    @Composable
+    fun MainScreenAdaptiveGrid16dp() {
+        MainScreenGrid(
+            modifier = Modifier.fillMaxSize(),
+            columns = StaggeredGridCells.Adaptive(16.dp)
+        )
+    }
 
 }
