@@ -13,9 +13,6 @@
 ## 결과물
 
 <img src ="https://github.com/KwangWookHa/Compose-Study-LazyStaggeredGrid/assets/44091641/19704e48-dc0b-445c-97ee-c840933d2333" width=320>
- , 
 <img src ="https://github.com/KwangWookHa/Compose-Study-LazyStaggeredGrid/assets/44091641/0fc7d2d0-6ea9-4926-946e-f42f41c9c0e6" width=320>
- , 
-<img src ="https://github.com/KwangWookHa/Compose-Study-LazyStaggeredGrid/assets/44091641/fdccfbbf-bd4c-4108-ac1f-5fba54739641" width=320>
 
 
