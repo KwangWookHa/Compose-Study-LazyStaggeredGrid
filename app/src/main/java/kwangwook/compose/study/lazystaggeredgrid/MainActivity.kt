@@ -3,7 +3,13 @@ package kwangwook.compose.study.lazystaggeredgrid
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -13,10 +19,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kwangwook.compose.study.lazystaggeredgrid.ui.ListItem
+import kwangwook.compose.study.lazystaggeredgrid.ui.RandomColorBox
 import kwangwook.compose.study.lazystaggeredgrid.ui.theme.ComposeStudyLazyStaggeredGridTheme
 
 class MainActivity : ComponentActivity() {
-    
+
+    companion object {
+        private const val STAGGERED_GRID_CELLS_COUNT = 2
+    }
+
     private val exampleItems = List(100) {
         ListItem(
             height = (100..300).random().dp,
@@ -24,31 +35,27 @@ class MainActivity : ComponentActivity() {
         )
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyLazyStaggeredGridTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
+                    LazyVerticalStaggeredGrid(
+                        modifier = Modifier.fillMaxSize(),
+                        columns = StaggeredGridCells.Fixed(STAGGERED_GRID_CELLS_COUNT),
+                        contentPadding = PaddingValues(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalItemSpacing = 16.dp
+                    ) {
+                        items(exampleItems) {
+                            RandomColorBox(it)
+                        }
+                    }
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeStudyLazyStaggeredGridTheme {
-        Greeting("Android")
-    }
 }

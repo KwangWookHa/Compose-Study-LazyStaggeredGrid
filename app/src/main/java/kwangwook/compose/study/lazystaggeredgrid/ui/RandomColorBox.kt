@@ -11,7 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ColorBox(item: ListItem) {
+fun RandomColorBox(item: ListItem) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
